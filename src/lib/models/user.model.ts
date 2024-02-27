@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
+import { Schema, model, models } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new Schema({
+  clerkId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,
@@ -11,38 +16,26 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  firstName: {
+  photo: {
     type: String,
     required: true,
+  },
+  firstName: {
+    type: String,
   },
   lastName: {
     type: String,
-    required: true,
-  },
-  photo: {
-    type: String,
-  },
-  clerkId: {
-    type: String,
-    required: true,
-    unique: true,
   },
   planId: {
     type: Number,
     default: 1,
   },
-  creditsBalance: {
+  creditBalance: {
     type: Number,
     default: 10,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+
+const User = models?.User || model("User", UserSchema);
+
 export default User;
